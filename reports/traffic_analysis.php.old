@@ -1,0 +1,361 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2><a href="<?php echo $pUrl;?>"><?php echo $rModule['cmTitle'];?></a></h2>
+            <div class="clearfix"></div>
+        </div>
+        <?php
+            if(isset($_GET['show'])){
+                $date_range=$_GET['date_range'];
+            }
+            else{
+
+                $dr = date('d-m-Y 00:00:00',TODAY_TIME);
+                $dr2= date('d-m-Y 00:00:00',TODAY_TIME);
+                $date_range=$dr.'__'.$dr2;
+            }
+
+            $dates=explode('__',$date_range);
+            $from_date=strtotime($dates[0]);
+            $from=$from_date;
+            $to=strtotime($dates[1]);
+            if(date('H:i',$to)=='00:00'){
+                $to=strtotime('+1 day',$to);
+                $to=strtotime('-1 second',$to);
+            }
+            $sameDay=false;
+            if(date('d-m-Y',$from)==date('d-m-Y',$to)){
+                $sameDay=true;
+            }
+            $diff=$to-$from;
+            $dateRangeVal=date('d-m-Y h:i A',$from_date).'__'.date('d-m-Y h:i A',$to);
+            $dateRangeShow=date('d-m-Y h:i A',$from_date).' - '.date('d-m-Y h:i A',$to);
+            $st_date = $dates[0];
+            $ed_date = $dates[1];
+
+            if($diff>82000||$to<strtotime('-1 hour')){
+                $reportTable=$db->settingsValue('commentReportTable');
+                $wallCommentReportTable=$db->settingsValue('commentWallReportTable');
+            }
+            else{
+                $reportTable=13;
+                $wallCommentReportTable=14;
+            }
+            $reporDatac=array(
+                'name'=>'Trafic_Analysis_Report_Comment_'.date('d_m_Y',$from_date).'_'.date('d_m_Y',$to_date),
+                'title'=>array(
+                    array('title'=>"Date"           ,'key'=>'d' ,'w'=>10    ,'hw'=> 3),
+                    array('title'=>"From"           ,'key'=>'f','w'=>10    ,'hw'=> 12),
+                    array('title'=>"To"             ,'key'=>'t','w'=>10    ,'hw'=> 15),
+                    array('title'=>"Query Recived"  ,'key'=>'rc' ,'w'=>12    ,'hw'=> 12),
+                    array('title'=>"Query Replied"  ,'key'=>'rp' ,'w'=>12    ,'hw'=> 15),
+                    array('title'=>"Replied 20 Min" ,'key'=>'r2' ,'w'=>12    ,'hw'=> 15),
+                    array('title'=>"AHT"            ,'key'=>'h' ,'w'=>10    ,'hw'=> 15),
+                    array('title'=>"ART"            ,'key'=>'r' ,'w'=>10    ,'hw'=> 15),
+                    array('title'=>"Max Wait"       ,'key'=>'m' ,'w'=>10    ,'hw'=> 15),
+                    array('title'=>"Response Rate"  ,'key'=>'rr' ,'w'=>12    ,'hw'=> 15),
+                    array('title'=>"Service Level"  ,'key'=>'sl' ,'w'=>12    ,'hw'=> 15),
+                ),
+                'data'=>array()
+            );
+            $reporDataw=array(
+                'name'=>'Trafic_Analysis_Report_Wall_'.date('d_m_Y',$from_date).'_'.date('d_m_Y',$to_date),
+                'title'=>array(
+                    array('title'=>"Date"           ,'key'=>'d' ,'w'=>10    ,'hw'=> 3),
+                    array('title'=>"From"           ,'key'=>'f','w'=>10    ,'hw'=> 12),
+                    array('title'=>"To"             ,'key'=>'t','w'=>10    ,'hw'=> 15),
+                    array('title'=>"Query Recived"  ,'key'=>'rc' ,'w'=>12    ,'hw'=> 12),
+                    array('title'=>"Query Replied"  ,'key'=>'rp' ,'w'=>12    ,'hw'=> 15),
+                    array('title'=>"Replied 5 Min" ,'key'=>'r2' ,'w'=>12    ,'hw'=> 15),
+                    array('title'=>"AHT"            ,'key'=>'h' ,'w'=>10    ,'hw'=> 15),
+                    array('title'=>"ART"            ,'key'=>'r' ,'w'=>10    ,'hw'=> 15),
+                    array('title'=>"Max Wait"       ,'key'=>'m' ,'w'=>10    ,'hw'=> 15),
+                    array('title'=>"Response Rate"  ,'key'=>'rr' ,'w'=>12    ,'hw'=> 15),
+                    array('title'=>"Service Level"  ,'key'=>'sl' ,'w'=>12    ,'hw'=> 15),
+                ),
+                'data'=>array()
+            );
+
+            /*
+            $exArrayc['xData'] = array("Date","From","To","Query Recived","Query Replied","Replied 20 Min","Avg handling Time","Avg Wait","Max Wait","Response Rate","Service Level");
+            $exArrayw['xData'] = array("Date","From","To","Query Recived","Query Replied","Replied 5 Min","Avg handling Time","Avg Wait","Max Wait","Response Rate","Service Level");*/
+        ?>
+        <script type="text/javascript">
+            var reportDate='<?php echo date('d-m-y',$from);?>';
+            $(document).ready(function(){
+                $('#reportrange').daterangepicker({
+                    opens: "right",
+                    autoApply: true,
+                    timePicker: true,
+                    timePicker24Hour: true,
+                    startDate: "<?php echo date('m/d/Y',$from_date);?>",
+                    endDate: "<?php echo date('m/d/Y',$to);?>"
+                    }, 
+                    function(start, end) {
+                        $('#reportrange span').html(start.format('DD-MM-YYYY hh:mm A') + ' - ' + end.format('DD-MM-YYYY hh:mm A'));
+                        $('#date_range').val(start.format('DD-MM-YYYY HH:mm')+'__'+end.format('DD-MM-YYYY HH:mm'));
+                });
+            });
+        </script>
+        <form method="GET" class="form-inline form_inline" action="">
+            <?php echo URL_INFO;?>
+            <div class="form-group">
+                <input type="hidden" id="date_range" name="date_range" value="<?php echo $dateRangeVal;?>">
+                <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; height:34px; width: 100%">
+                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                    <span><?php echo $dateRangeShow;?></span> <b class="caret"></b>
+                </div>
+            </div>
+            <input type="submit" value="Show" name="show" class="btn btn-success btn-sm">
+        </form>
+
+    </div>
+</div>
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h3>Comment</h3>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="col-lg-12">
+                        <a class="btn btn-default" id="exportComments">Export</a>
+                        <table class="table table-striped table-bordered" style="text-align: right;">
+                            <tr>
+                                <td>Date</td>
+                                <td>From</td>
+                                <td>To</td>
+                                <td>Query Recived</td>
+                                <td>Query Replied</td>
+                                <td>Replied 20 Min</td>
+                                <td>Avg handling Time</td>
+                                <td>Avg Wait</td>
+                                <td>Max Wait</td>
+                                <td>Response Rate</td>
+                                <td>Service Level</td>
+                            </tr>
+                            <?php
+                                $dates = range($from, $to,3600);
+                                $sFrom=$from;
+                                while($sFrom<$to){
+                                    $sTo=strtotime('+1 hour',$sFrom);
+                                    $nf=$sTo;
+                                    $sTo=strtotime('-1 second',$sTo);
+                                    /*}
+                                    foreach($dates as $from){
+                                    $to=strtotime('+ 1 hour',$from);
+                                    $to=strtotime('-1 second',$to);*/
+                                ?>
+                                <tr id="c_<?php echo $sFrom;?>" class="ajaxReport">
+                                    <td>
+                                        <?php echo date('d-M-y',$sFrom);?>
+                                        <input type="hidden" class="from" value="<?php echo $sFrom;?>">
+                                        <input type="hidden" class="to" value="<?php echo $sTo;?>">
+                                    </td>
+                                    <td class="from"><?php echo date('h:i A',$sFrom);?></td>
+                                    <td class="to"><?php echo date('h:i A',$sTo);?></td>
+                                    <td class="qReceived"></td>
+                                    <td class="totalReply"></td>
+                                    <td class="totalReply20Min"></td>
+                                    <td class="aht"></td>
+                                    <td class="art"></td>
+                                    <td class="mwt"></td>
+                                    <td class="rr"></td>
+                                    <td class="sl"></td>
+                                </tr>
+                                <?php  
+                                    $sFrom=$nf;
+                                }
+                            ?>
+                            <tr id="cTotal">
+                                <td><b>Total</b></td>
+                                <td colspan="2"></td>
+                                <td><b class="tc"></b></td>
+                                <td><b class="tr"></b></td>
+                                <td><b class="tr20"></b></td>
+                                <td colspan="5"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h3>Wall</h3>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="col-lg-12">
+                        <a class="btn btn-default" id="exportWall">Export</a>
+                        <table class="table table-striped table-bordered" style="text-align: right;">
+                            <tr>
+                                <td>Date</td>
+                                <td>From</td>
+                                <td>To</td>
+                                <td>Query Recived</td>
+                                <td>Query Replied</td>
+                                <td>Replied 5 Min</td>
+                                <td>Avg handling Time</td>
+                                <td>Avg Wait</td>
+                                <td>Max Wait</td>
+                                <td>Response Rate</td>
+                                <td>Service Level</td>
+                            </tr>
+                            <?php
+                                $tc=0;
+                                $tr=0;
+                                //$dddd=1;
+                                $tr20=0;
+                                $sFrom=$from;
+                                while($sFrom<$to){
+                                    $sTo=strtotime('+1 hour',$sFrom);
+                                    $nf=$sTo;
+                                    $sTo=strtotime('-1 second',$sTo);
+
+                                    /*foreach($dates as $from){
+                                    $to=strtotime('+ 1 hour',$from);
+                                    $to=strtotime('-1 second',$to);*/
+                                ?>
+                                <tr id="w_<?php echo $sFrom;?>">
+                                    <td>
+                                        <?php echo date('d-M-y',$sFrom);?>
+                                        <input type="hidden" class="from" value="<?php echo $sFrom;?>">
+                                        <input type="hidden" class="to" value="<?php echo $sTo;?>">
+                                    </td>
+                                    <td><?php echo date('h:i A',$sFrom);?></td>
+                                    <td><?php echo date('h:i A',$sTo);?></td>
+                                    <td class="qReceived"></td>
+                                    <td class="totalReply"></td>
+                                    <td class="totalReply20Min"></td>
+                                    <td class="aht"></td>
+                                    <td class="art"></td>
+                                    <td class="mwt"></td>
+                                    <td class="rr"></td>
+                                    <td class="sl"></td>
+                                </tr>
+                                <?php
+                                    $sFrom=$nf;
+                                }
+                            ?>
+                            <tr id="wTotal">
+                                <td><b>Total</b></td>
+                                <td colspan="2"></td>
+                                <td><b class="tc"></b></td>
+                                <td><b class="tr"></b></td>
+                                <td><b class="tr20"></b></td>
+                                <td colspan="5"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    <?php echo "var reportExportC = ".json_encode($reporDatac).";";?>
+    <?php echo "var reportExportW = ".json_encode($reporDataw).";";?>
+    var tc=0;
+    var tr=0;
+    var tr20=0;
+    var wtc=0;
+    var wtr=0;
+    var wtr20=0;
+    $(document).ready(function(){
+        $("#exportComments").click(function(){
+            reportJsonToExcel(reportExportC);
+        });
+        $("#exportWall").click(function(){
+            reportJsonToExcel(reportExportW);
+        });
+        var i=0;
+        rpUsers=[];
+        $('.ajaxReport').each(function(){
+            var tID=$(this).closest('tr').attr('id');
+            var from=$('#'+tID+' .from').val();
+            var to=$('#'+tID+' .to').val();
+            rpUsers[i]={from:from,to:to}
+            i++;
+        });
+        //t(rpUsers);
+        loadTrafficAnalysisReport(0);
+        //t('length'+rpUsers.length);
+    });
+    <?php if(isset($_GET['flush'])){ ?> ajUrl+='&flush=1'; <?php } ?>
+    function loadTrafficAnalysisReport(index){
+        t(reportExportC.data);
+        if(rpUsers.length>index){
+            var cID='c_'+rpUsers[index].from;
+            var wID='w_'+rpUsers[index].from;
+            $('#'+cID+' .qReceived').html(loadingImage);
+            $('#'+wID+' .qReceived').html(loadingImage);
+            $.post(ajUrl,{loadTrafficAnalysisReport:1,from:rpUsers[index].from,to:rpUsers[index].to},function(data){
+                if(data.status==1){
+                    c=data.comment;
+                    tc+=parse_int(c.qReceived);
+                    tr+=parse_int(c.totalReply);
+                    tr20+=c.totalReply20Min;
+                    $('#'+cID+' .from').html(c.from);
+                    $('#'+cID+' .to').html(c.to);
+                    $('#'+cID+' .qReceived').html(c.qReceived);
+                    $('#'+cID+' .totalReply').html(c.totalReply);
+                    $('#'+cID+' .totalReply20Min').html(c.totalReply20Min);
+                    $('#'+cID+' .aht').html(c.aht);
+                    $('#'+cID+' .art').html(c.art);
+                    $('#'+cID+' .mwt').html(c.mwt);
+                    $('#'+cID+' .rr').html(c.rr);
+                    $('#'+cID+' .sl').html(c.sl);
+                    $('#cTotal .tc').html(tc);
+                    $('#cTotal .tr').html(tr);
+                    $('#cTotal .tr20').html(tr20);
+                    var exportI={
+                        d:c.date,f:c.from,t:c.to,rc:c.qReceived,rp:c.totalReply,r2:c.totalReply20Min,h:c.aht,r:c.art,m:c.mwt,rr:c.rr,sl:c.sl}
+                    reportExportC.data.push(exportI);
+
+                    w=data.wall;
+                    wtc+=parse_int(w.qReceived);
+                    wtr+=parse_int(w.totalReply);
+                    wtr20+=parse_int(w.totalReply20Min);
+                    $('#'+wID+' .from').html(w.from);
+                    $('#'+wID+' .to').html(w.to);
+                    $('#'+wID+' .qReceived').html(w.qReceived);
+                    $('#'+wID+' .totalReply').html(w.totalReply);
+                    $('#'+wID+' .totalReply20Min').html(w.totalReply20Min);
+                    $('#'+wID+' .aht').html(w.aht);
+                    $('#'+wID+' .art').html(w.art);
+                    $('#'+wID+' .mwt').html(w.mwt);
+                    $('#'+wID+' .rr').html(w.rr);
+                    $('#'+wID+' .sl').html(w.sl);
+                    $('#wTotal .tc').html(wtc);
+                    $('#wTotal .tr').html(wtr);
+                    $('#wTotal .tr20').html(wtr20);
+
+                    var exportI={
+                        d:w.date,f:w.from,t:w.to,rc:w.qReceived,rp:w.totalReply,r2:w.totalReply20Min,h:w.aht,r:w.art,m:w.mwt,rr:w.rr,sl:w.sl}
+                    reportExportW.data.push(exportI);
+                }
+                else{
+                    $('#'+cID+' .qReceived').html('-');
+                    $('#'+wID+' .qReceived').html('-');
+                }
+                index++;
+                loadTrafficAnalysisReport(index);
+            });
+        }
+        else{
+            //t('done'+index);
+        }
+    }
+</script>

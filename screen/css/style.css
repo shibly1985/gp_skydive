@@ -1,0 +1,280 @@
+
+body{
+	margin: 0px;
+	padding: 0px;
+}
+
+.option {
+  margin-top: 7px;
+  width: 190px !important;
+}
+
+.date {
+	background-color: #00a8e7;
+	margin-bottom: 10px;
+	color: #fff;
+}
+
+.date h4{
+	font-size: 25px;
+	font-weight: 700;
+	text-align: center;
+}
+
+.date i {
+  font-size: 22px !important;
+  padding: 13px 10px;
+  position: absolute;
+}
+
+.fa.fa-clock-o {
+  font-size: 28px !important;
+  padding: 10px 30px;
+}
+
+.gp table{
+	width: 100%;
+
+}
+
+.gp_title, .ssl_title {
+  font-family: Boulevard Saint Denis;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  width: 25%;
+  color: #86C653;
+}
+.gp_name, .ssl_name {
+  font-family: Boulevard Saint Denis;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 0 5px;
+  width: 60%;
+  color: #00A8E7;
+}
+
+.gp_num {
+  color: #86C653;
+  font-size: 18px;
+  font-weight: 700;
+  height: 35px;
+  text-align: center;
+  width: 15%;
+}
+.queue_title{
+	text-align: center;
+	height: 35px;
+	font-size: 20px;
+	background-color: #86C653;
+	font-family: Boulevard Saint Denis;
+}
+.queue_name {
+  color: #de1771;
+  font-family: Boulevard Saint Denis;
+  font-size: 19px;
+  padding: 0 5px;
+  width: 70%;
+}
+.queue_num{
+	width: 30%;
+	height: 35px;
+
+}
+
+.name_title, .lifo_title,.fifo_title{
+	background-color: #86C653;
+	height: 30px;
+	text-align: center;
+}
+
+.LIFO_FIFO{
+	margin-top: 10px;
+}
+.LIFO_FIFO p{
+	font-size: 21px;
+	font-weight: 600;
+	color: #86C653;
+}
+
+
+.fifo_name{
+	width: 60%;
+	padding: 0 5px;
+	font-size: 19px;
+	color: #DE1771;
+	font-family: Boulevard Saint Denis;
+}
+
+.lifo_num{
+	width: 20%;
+	height: 30px;
+	text-align: center;
+	color: green;
+	font-weight: 600
+}
+
+.fifo_num{
+	width: 20%;
+	height: 30px;
+	text-align: center;
+	color: #00A8E7;
+	font-weight: 600
+
+}
+
+
+.comments1, .comments2,.comments3{
+	background-color: #00A8E7;
+	text-align: center;
+	height: 30px;
+	font-weight: 700;
+	color: #fff;
+	font-size: 20px;
+
+}
+
+.comments{
+	margin-top: 10px;
+	color: #000;
+	font-size: 16px;
+}
+
+.title {
+  font-family: Boulevard Saint Denis;
+  font-size: 21px;
+  font-weight: 700;
+  text-align: center;
+  width: 35%;
+  color: #86C653;
+}
+
+.time {
+  color: red;
+  font-weight: 600;
+  text-align: center;
+  width: 20%;
+}
+.SL{
+	width: 10%;
+	text-align: center;
+	color: #86C653;
+	font-weight: 600;
+
+}
+.max_name {
+  color: blue;
+  font-size: 17px;
+  padding: 0 5px;
+  width: 35%;
+  font-family: Boulevard Saint Denis;
+ 
+}
+
+.min_name{
+  color: blue;
+  font-size: 17px;
+  padding: 0 5px;
+  width: 35%;
+  font-family: Boulevard Saint Denis;
+  
+}
+.name {
+  font-family: Boulevard Saint Denis;
+  font-weight: 600;
+  padding: 0 5px;
+  width: 35%;
+  font-size: 17px;
+}
+
+table{
+	width: 100%;
+}
+
+.Comment_title h3 {
+  font-family: Boulevard Saint Denis;
+  color: #86c653;
+  font-weight: 600;
+  
+}
+
+
+
+/*------------ Login Page ----------*/
+.form-signin
+{
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-signin .form-signin-heading, .form-signin .checkbox
+{
+    margin-bottom: 10px;
+}
+.form-signin .checkbox
+{
+    font-weight: normal;
+}
+.form-signin .form-control
+{
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.form-signin .form-control:focus
+{
+    z-index: 2;
+}
+.form-signin input[type="text"]
+{
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"]
+{
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.account-wall
+{
+    margin-top: 20px;
+    padding: 40px 0px 20px 0px;
+    background-color: #f7f7f7;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.login-title
+{
+    color: #555;
+    font-size: 18px;
+    font-weight: 400;
+    display: block;
+}
+.profile-img
+{
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+.need-help
+{
+    margin-top: 10px;
+}
+.new-account
+{
+    display: block;
+    margin-top: 10px;
+}
+
+

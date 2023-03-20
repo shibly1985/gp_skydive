@@ -1,0 +1,14 @@
+<?php
+  $afID=$_POST['attatchmentRemove'];
+  $af=$db->get_rowData($general->table(61),'afID',$afID);
+  if(!empty($af)){
+      if($af['uID']==UID){
+          $delete=$db->delete($general->table(61),array('afID'=>$afID));
+          if($delete){
+              unlink('attachments/'.UID.'/'.$af['afFile']);
+              $jArray['status']=1;
+          }
+      }
+  }
+  $general->jsonHeader($jArray);
+?>

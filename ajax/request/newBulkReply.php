@@ -1,0 +1,16 @@
+<?php
+    $type=$_POST['type'];if($type!='c')$type='w';
+    if($type=='c'){
+        $pTbl=4;
+        $cTbl=13;
+        include(ROOT_PATH."/ajax/request/newBulkReplyComment.php");
+    }
+    else{
+        $pTbl=12;
+        $cTbl=14;
+        include(ROOT_PATH."/ajax/request/newBulkReplyWall.php");
+    }
+    $social->lastTime($jArray);
+    $jArray['m']=show_msg('Yes');
+    $general->jsonHeader($jArray);
+?>

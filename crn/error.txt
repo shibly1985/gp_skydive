@@ -1,0 +1,45 @@
+backtrace->[{"file":"\/var\/www\/sslbd\/gp\/crn\/comment_table_copy.php","line":6,"function":"runQuery","class":"DB","object":{},"type":"->","args":["INSERT INTO comments_status_hour_report_1 SELECT * FROM comments_status","d"]}]
+query->INSERT INTO comments_status_hour_report_1 SELECT * FROM comments_status
+0->SQL Query error. Lock wait timeout exceeded; try restarting transaction
+backtrace->[{"file":"\/var\/www\/sslbd\/gp\/crn\/comment_table_delete.php","line":6,"function":"runQuery","class":"DB","object":{},"type":"->","args":["delete from comments_status_hour_report_2","d"]}]
+query->delete from comments_status_hour_report_2
+0->SQL Query error. Lock wait timeout exceeded; try restarting transaction
+backtrace->[{"file":"\/var\/www\/sslbd\/gp\/crn\/comment_table_delete.php","line":6,"function":"runQuery","class":"DB","object":{},"type":"->","args":["delete from comments_status_hour_report_2","d"]}]
+query->delete from comments_status_hour_report_2
+0->SQL Query error. Lock wait timeout exceeded; try restarting transaction
+backtrace->[{"file":"\/var\/www\/sslbd\/gp\/crn\/comment_table_delete.php","line":6,"function":"runQuery","class":"DB","object":{},"type":"->","args":["delete from comments_status_hour_report_2","d"]}]
+query->delete from comments_status_hour_report_2
+0->SQL Query error. Lock wait timeout exceeded; try restarting transaction
+backtrace->[{"file":"\/var\/www\/sslbd\/gp\/crn\/comment_table_copy.php","line":6,"function":"runQuery","class":"DB","object":{},"type":"->","args":["INSERT INTO comments_status_hour_report_2 SELECT * FROM comments_status","d"]}]
+query->INSERT INTO comments_status_hour_report_2 SELECT * FROM comments_status
+0->SQL Query error. Duplicate entry '1006251472723640_1776498505698929' for key 'PRIMARY'
+backtrace->[{"file":"\/var\/www\/sslbd\/gp\/crn\/comment_table_copy.php","line":6,"function":"runQuery","class":"DB","object":{},"type":"->","args":["INSERT INTO comments_status_hour_report_2 SELECT * FROM comments_status","d"]}]
+query->INSERT INTO comments_status_hour_report_2 SELECT * FROM comments_status
+0->SQL Query error. Lock wait timeout exceeded; try restarting transaction
+backtrace->[{"file":"\/var\/www\/sslbd\/gp\/crn\/comment_table_copy.php","line":6,"function":"runQuery","class":"DB","object":{},"type":"->","args":["INSERT INTO comments_status_hour_report_2 SELECT * FROM comments_status","d"]}]
+query->INSERT INTO comments_status_hour_report_2 SELECT * FROM comments_status
+0->SQL Query error. Lock wait timeout exceeded; try restarting transaction
+backtrace->[{"file":"\/var\/www\/sslbd\/gp\/crn\/comment_table_delete.php","line":6,"function":"runQuery","class":"DB","object":{},"type":"->","args":["delete from comments_status_hour_report_2","d"]}]
+query->delete from comments_status_hour_report_2
+0->SQL Query error. MySQL server has gone away
+backtrace->[{"file":"\/var\/www\/sslbd\/gp\/crn\/comment_table_copy.php","line":6,"function":"runQuery","class":"DB","object":{},"type":"->","args":["INSERT INTO comments_status_hour_report_1 SELECT * FROM comments_status","d"]}]
+query->INSERT INTO comments_status_hour_report_1 SELECT * FROM comments_status
+0->SQL Query error. Lock wait timeout exceeded; try restarting transaction
+backtrace->[{"file":"\/var\/www\/sslbd\/gp\/crn\/comment_table_delete.php","line":6,"function":"runQuery","class":"DB","object":{},"type":"->","args":["delete from comments_status_hour_report_1","d"]}]
+query->delete from comments_status_hour_report_1
+0->SQL Query error. MySQL server has gone away
+backtrace->[{"file":"\/var\/www\/sslbd\/gp\/crn\/comment_table_copy.php","line":6,"function":"runQuery","class":"DB","object":{},"type":"->","args":["INSERT INTO comments_status_hour_report_1 SELECT * FROM comments_status","d"]}]
+query->INSERT INTO comments_status_hour_report_1 SELECT * FROM comments_status
+0->SQL Query error. Lock wait timeout exceeded; try restarting transaction
+backtrace->[{"file":"\/var\/www\/sslbd\/gp\/crn\/comment_table_delete.php","line":6,"function":"runQuery","class":"DB","object":{},"type":"->","args":["delete from comments_status_hour_report_1","d"]}]
+query->delete from comments_status_hour_report_1
+0->SQL Query error. MySQL server has gone away
+backtrace->14-12-2017 01:09:01 - [{"file":"\/var\/www\/sslbd\/gp\/crn\/comment_table_copy.php","line":6,"function":"runQuery","class":"DB","object":{},"type":"->","args":["INSERT INTO comments_status_hour_report_2 SELECT * FROM comments_status","d"]}]
+query->INSERT INTO comments_status_hour_report_2 SELECT * FROM comments_status
+0->SQL Query error. Duplicate entry '1006251472723640_1776498505698929' for key 'PRIMARY'
+backtrace->14-12-2017 01:09:01 - [{"file":"\/var\/www\/sslbd\/gp\/crn\/comment_table_copy.php","line":6,"function":"runQuery","class":"DB","object":{},"type":"->","args":["INSERT INTO comments_status_hour_report_1 SELECT * FROM comments_status","d"]}]
+query->INSERT INTO comments_status_hour_report_1 SELECT * FROM comments_status
+0->SQL Query error. Duplicate entry '1006251472723640_1776498505698929' for key 'PRIMARY'
+backtrace->01-01-2018 02:09:02 - [{"file":"\/var\/www\/sslbd\/gp\/crn\/comment_table_copy.php","line":6,"function":"runQuery","class":"DB","object":{},"type":"->","args":["INSERT INTO comments_status_hour_report_1 SELECT * FROM comments_status","d"]}]
+query->INSERT INTO comments_status_hour_report_1 SELECT * FROM comments_status
+0->SQL Query error. Duplicate entry '1006251472723640_1776498505698929' for key 'PRIMARY'

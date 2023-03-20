@@ -1,0 +1,12 @@
+<?php
+$jArray=array('status'=>0);
+    $comment_id=$_POST['sentCommentHide'];
+    $type=$_POST['type'];
+    if(!isset($_POST['targetType'])){$targetType='c';}else{$targetType=$_POST['targetType'];}
+    $hide=$social->hideFromFB($comment_id,$type,$targetType);
+    if($hide==true){
+        $jArray['status']=1;
+    }
+    $jArray['m']=show_msg('Yes');
+    $general->jsonHeader($jArray);
+?>

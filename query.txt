@@ -1,0 +1,26 @@
+CREATE TABLE `assigned_comment_status` (
+    `acsID` INT(11) NOT NULL,
+    `uID` INT(11) NOT NULL,
+    `comment_id` INT(11) NULL DEFAULT NULL,
+    `assignTime` INT(11) NULL DEFAULT NULL,
+    PRIMARY KEY (`acsID`),
+    UNIQUE INDEX `comment_id` (`comment_id`),
+    INDEX `uID` (`uID`),
+    CONSTRAINT `FK_assigned_comment_status_useraccount` FOREIGN KEY (`uID`) REFERENCES `useraccount` (`uID`) ON UPDATE CASCADE ON DELETE CASCADE
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
+CREATE TABLE `assigned_wall` (
+    `acsID` INT(11) NOT NULL AUTO_INCREMENT,
+    `uID` INT(11) NOT NULL,
+    `comment_id` VARCHAR(50) NULL DEFAULT NULL,
+    `assignTime` VARCHAR(50) NULL DEFAULT NULL,
+    PRIMARY KEY (`acsID`),
+    UNIQUE INDEX `comment_id` (`comment_id`),
+    INDEX `uID` (`uID`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+ROW_FORMAT=COMPACT
+;
